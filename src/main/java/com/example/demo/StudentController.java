@@ -1,11 +1,14 @@
 package com.example.demo;
 
 import java.util.concurrent.atomic.AtomicLong;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.MySQL;
 import java.util.ArrayList;
@@ -38,5 +41,11 @@ public class StudentController {
         //String json = "{\"total\":" + count.get(0).get(0) + ",\"rows\":" + data + "}";
         //return json;
         return map;
+    }
+
+    @PostMapping("/students/{studentId}")
+    // ArrayList<ArrayList<String>>
+    public String editStudent(@PathVariable String studentId, @RequestBody String student) {
+        return student;
     }
 }

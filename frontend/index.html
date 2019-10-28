@@ -3,15 +3,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>学生管理系统</title>
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
+    <link href="./static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./static/jquery-easyui-1.7.0/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./static/jquery-easyui-1.7.0/themes/icon.css">
+    <link href="./static/layui-v2.5.5/layui/css/layui.css" rel="stylesheet" />
+    <link href="./index.css" rel="stylesheet" />
 </head>
 <body>
 
 
 <table id="dg" class="easyui-datagrid" style="width:100%"
-       title="学生管理系统" iconCls="icon-save"
-       rownumbers="true" pagination="true" fitColumns="true">
+       title="学生管理系统"
+       rownumbers="true" pagination="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
         <th field="studentId" width="80">学生Id</th>
@@ -28,8 +31,10 @@
     </tr>
     </thead>
 </table>
-<script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.min.js"></script>
-<script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+<script src="./static/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="./static/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="./static/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+<script src="./static/layui-v2.5.5/layui/layui.js"></script>
 <script type="text/javascript" src="index.js"></script>
 </body>
 </html>
