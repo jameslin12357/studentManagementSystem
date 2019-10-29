@@ -14,7 +14,7 @@
 
 <table id="dg" class="easyui-datagrid" style="width:100%"
        title="学生管理系统"
-       rownumbers="true" pagination="true" fitColumns="true" singleSelect="true">
+       rownumbers="true" pagination="true" fitColumns="true" singleSelect="true" data-options="toolbar:'#tb'">
     <thead>
     <tr>
         <th field="studentId" width="80">学生Id</th>
@@ -30,7 +30,19 @@
         <th field="updated" width="80">编辑日期</th>
     </tr>
     </thead>
+
 </table>
+
+<div id="tb" style="padding:2px 5px;">
+    <div class="mr-10">
+        <input type="text" id="inputSearchStudent" placeholder="输入学生名字检索" class="pd-5px" />
+        <i id="inputSearchIcon" class="fa fa-search cr-lightblue" onclick="searchStudent()"></i>
+    </div>
+    <div class="cursorPointer" onclick="createStudent()">
+        <i class="fa fa-file-o cr-lightblue"></i>
+        <span>新建学生</span>
+    </div>
+</div>
 <script src="./static/jquery-easyui-1.7.0/jquery.min.js"></script>
 <script src="./static/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
 <script src="./static/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>

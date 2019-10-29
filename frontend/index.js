@@ -47,9 +47,103 @@ function detailsStudent(){
     }, 1000);
 }
 
+function createStudent(){
+    setTimeout(function(){
+        layer.open({
+            btn: [],
+            shade: 0,
+            title: "新建学生",
+            content: `<form class="layui-form layui-form-pane" action="">
+                   <div class="layui-form-item">
+                    <label class="layui-form-label">名</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="firstName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" required>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">姓</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="lastName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"  required>
+                    </div>
+                  </div>
+                     <div class="layui-form-item">
+                    <label class="layui-form-label">专业</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="major" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" required>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">简介</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="bio" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"  required>
+                    </div>
+                  </div>
+                     <div class="layui-form-item">
+                    <label class="layui-form-label">年龄</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="age" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" required>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">分数</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="grade" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"  required>
+                    </div>
+                  </div>
+                     <div class="layui-form-item">
+                    <label class="layui-form-label">GPA</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="GPA" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" required>
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">性别</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="gender" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"  required>
+                    </div>
+                  </div>
+ <button type="submit" class="layui-btn layui-btn-normal fr">保存</button>
+</form>`
+        });
+        document.getElementsByTagName("form")[0].addEventListener("submit",function(e){
+            e.preventDefault();
+            createStudentPost();
+        });
+    }, 1000);
+}
+
+function createStudentPost(){
+    var form = document.getElementsByTagName("form")[0];
+    var inputs = form.getElementsByTagName("input");
+    var firstName = inputs[0].value;
+    var lastName = inputs[1].value;
+    var major = inputs[2].value;
+    var bio = inputs[3].value;
+    var age = inputs[4].value;
+    var grade = inputs[5].value;
+    var gpa = inputs[6].value;
+    var gender = inputs[7].value;
+    $.ajax({
+        type: "post",
+        url: `http://localhost:8080/students`,
+        data: {
+            "firstName": firstName, "lastName": lastName, "major": major, "bio": bio, "age": age, "grade": grade, "gpa": gpa, "gender": gender
+        },
+        dataType: "json",
+        success: function (data) {
+            if (data == 1){
+                layer.closeAll();
+                layer.msg("学生已创建");
+                $('#dg').datagrid('reload');
+            }
+        },
+        error: function (item, err) {
+        }
+    });
+}
+
 function editStudent(){
     setTimeout(function(){
-        console.log(row);
         layer.open({
             btn: [],
             shade: 0,
@@ -133,14 +227,62 @@ function editStudentPost(){
         },
         dataType: "json",
         success: function (data) {
-            console.log(data);
-
+            if (data == 1){
+                layer.closeAll();
+                layer.msg("学生已编辑");
+                $('#dg').datagrid('reload');
+            }
         },
         error: function (item, err) {
         }
     });
+}
 
+function deleteStudent() {
+    setTimeout(function(){
+        layer.open({
+        btn: [],
+        shade: 0,
+        title: "删除学生",
+        content: `<div><div class="mb-15 tc">确定删除学生?</div><div class="tr"><button id="buttonDelete" type="submit" class="layui-btn layui-btn-danger">删除</button></div></div>`
+        });
+        document.getElementById("buttonDelete").addEventListener("click",function(e){
+            deleteStudentPost();
+        });
+    }, 1000);
+}
 
+function deleteStudentPost() {
+    var id = row.studentId;
+    $.ajax({
+        type: "get",
+        url: `http://localhost:8080/deleteStudent/${id}`,
+        dataType: "json",
+        success: function (data) {
+            if (data == 1) {
+                layer.closeAll();
+                layer.msg("学生已删除");
+                $('#dg').datagrid('reload');
+            }
+        },
+        error: function (item, err) {
+            console.log(err);
+        }
+    });
+}
+
+function searchStudent(){
+    var searchTerm = document.getElementById('inputSearchStudent').value;
+    var searchTermFinal = "";
+    if (searchTerm !== ""){
+        searchTermFinal = searchTerm;
+    }
+    $("#dg").datagrid({
+        url: `http://localhost:8080/searchStudent?term=${searchTermFinal}`,
+        method: 'get',
+        onLoadSuccess: function (data) {
+        }
+    });
 
 }
 

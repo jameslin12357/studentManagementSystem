@@ -2,6 +2,32 @@
     margin-right: 5px;
 }
 
+.mr-10{
+    margin-right: 10px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.pd-5px {
+    padding: 5px;
+}
+
 .bold {
     font-weight: bold;
+}
+
+.cr-lightblue {
+    color: lightblue;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+#tb {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }

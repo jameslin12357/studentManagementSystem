@@ -46,6 +46,48 @@ public class MySQL {
         return rows;
     }
 
+    public static int Update(String SQL)
+    {
+        //ArrayList<ArrayList<String>> rows = new ArrayList<ArrayList<String>>();
+        //ArrayList<HashMap<String, Object>> rows = new ArrayList<HashMap<String, Object>>();
+        int rows = 0;
+        try{
+            //step1 load the driver class
+            Class.forName("com.mysql.jdbc.Driver");
+
+            //step2 create the connection object
+            Connection con=DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/studentManagementSystem","root","1");
+
+            //step3 create the statement object
+            Statement stmt=con.createStatement();
+
+            //step4 execute query
+
+            rows = stmt.executeUpdate(SQL);
+            /*System.out.println(rs);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int cc = rsmd.getColumnCount();
+            while(rs.next()){
+                //ArrayList<String> row = new ArrayList<String>();
+                HashMap<String, Object> row = new HashMap<String, Object>();
+                for (int i = 1; i < cc + 1; i++){
+                    String colName = rsmd.getColumnName(i);
+                    String col = rs.getString(i);
+                    row.put(colName, col);
+                }
+                rows.add(row);
+            }
+            */
+            //step5 close the connection object
+            con.close();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return rows;
+    }
+
+
     public static String QueryInJSON(String SQL)
     {
         //ArrayList<HashMap<String,String>> rows = new ArrayList<HashMap<String,String>>();
